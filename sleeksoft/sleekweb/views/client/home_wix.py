@@ -70,15 +70,18 @@ from django.core.mail import send_mail,EmailMessage
     
 def home_wix_client(request):
     if request.method == 'GET':
-        user_agent = request.META.get('HTTP_USER_AGENT', '').lower()
-        is_mobile = 'mobile' in user_agent or 'android' in user_agent or 'iphone' in user_agent
+        context = {}
+        context['domain'] = settings.DOMAIN
+        return render(request, 'sleekweb/client/home_wix_2.html.html', context, status=200)
+        # user_agent = request.META.get('HTTP_USER_AGENT', '').lower()
+        # is_mobile = 'mobile' in user_agent or 'android' in user_agent or 'iphone' in user_agent
         
-        context = {
-            'domain': settings.DOMAIN
-        }
+        # context = {
+        #     'domain': settings.DOMAIN
+        # }
 
-        template = 'sleekweb/client/home_wix_2.html' if is_mobile else 'sleekweb/client/home_wix.html'
-        return render(request, template, context, status=200)
+        # template = 'sleekweb/client/home_wix_2.html' if is_mobile else 'sleekweb/client/home_wix.html'
+        # return render(request, template, context, status=200)
     # if request.method == 'GET':
     #     context = {}
     #     context['domain'] = settings.DOMAIN
