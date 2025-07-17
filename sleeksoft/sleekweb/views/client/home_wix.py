@@ -72,7 +72,7 @@ def home_wix_client(request):
     if request.method == 'GET':
         context = {}
         context['domain'] = settings.DOMAIN
-        return render(request, 'sleekweb/client/home_wix_2.html', context, status=200)
+        return render(request, 'sleekweb/client/hellow.html', context, status=200)
         # user_agent = request.META.get('HTTP_USER_AGENT', '').lower()
         # is_mobile = 'mobile' in user_agent or 'android' in user_agent or 'iphone' in user_agent
         
