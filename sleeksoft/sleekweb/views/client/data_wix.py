@@ -68,21 +68,11 @@ from django.core.mail import send_mail,EmailMessage
 
 
     
-def select_kvmn_client(request):
+def data_wix_client(request):
     if request.method == 'GET':
         context = {}
         context['domain'] = settings.DOMAIN
-        try:
-            context['obj'] = Website.objects.get(Count=1)
-        except:
-            context['obj'] = {}
-        context['list_Edit_dsdt_mb'] = Edit_dsdt.objects.filter(Category=0).order_by('Order')
-        context['list_Edit_dsdt_mn'] = Edit_dsdt.objects.filter(Category=1).order_by('Order')
-        context['list_image_slider_3'] = Photo_Slider.objects.filter(Count=3)
-        try:
-            context['obj_Count_1'] = Photo_Content.objects.get(Count=1)
-        except:
-            context['obj_Count_1'] = {}
+        context['all_data'] = Information.objects.all()
         # print('context:',context)
-        return render(request, 'sleekweb/client/select_kvmn_client.html', context, status=200)
+        return render(request, 'sleekweb/client/data_wix.html', context, status=200)
     

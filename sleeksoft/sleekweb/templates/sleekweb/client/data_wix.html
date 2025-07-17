@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách thông tin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">Danh sách thông tin</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto border border-gray-300">
+                <thead class="bg-gray-200 text-gray-700">
+                    <tr>
+                        <!-- <th class="px-4 py-2 border">ID</th> -->
+                        <th class="px-4 py-2 border">Họ</th>
+                        <th class="px-4 py-2 border">Tên</th>
+                        <th class="px-4 py-2 border">Email</th>
+                        <th class="px-4 py-2 border">Nội dung</th>
+                        <th class="px-4 py-2 border">Tạo lúc</th>
+                        <th class="px-4 py-2 border">Cập nhật lúc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for info in all_data %}
+                        <tr class="hover:bg-gray-100">
+                            <!-- <td class="px-4 py-2 border text-center">{{ info.id }}</td> -->
+                            <td class="px-4 py-2 border">{{ info.First_name }}</td>
+                            <td class="px-4 py-2 border">{{ info.Last_name }}</td>
+                            <td class="px-4 py-2 border">{{ info.Email }}</td>
+                            <td class="px-4 py-2 border">{{ info.Message }}</td>
+                            <td class="px-4 py-2 border text-sm text-gray-600">{{ info.Creation_time|date:"d-m-Y H:i" }}</td>
+                            <td class="px-4 py-2 border text-sm text-gray-600">{{ info.Update_time|date:"d-m-Y H:i" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="7" class="px-4 py-4 text-center text-gray-500">Không có dữ liệu nào.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
