@@ -24,34 +24,42 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- jQuery nếu bạn chưa thêm -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-$(document).ready(function () {
-  // Ánh xạ data-anchor ➝ id cần cuộn tới
-  const anchorMap = {
-    "anchors-m6ox40951": "comp-m6ox4094",
-    "anchors-m6ox409p6": "comp-m6ox409o3",
-    "anchors-m6oz75p4": "comp-m6ox4087"
-  };
+    <script>
+    $(document).ready(function () {
+    // Ánh xạ data-anchor ➝ id cần cuộn tới
+    const anchorMap = {
+        "anchors-m6ox40951": "comp-m6ox4094",
+        "anchors-m6ox409p6": "comp-m6ox409o3",
+        "anchors-m6oz75p4": "comp-m6ox4087"
+    };
 
-  $('a[data-anchor]').on('click', function (e) {
-    e.preventDefault();
+    $('a[data-anchor]').on('click', function (e) {
+        e.preventDefault();
 
-    const anchor = $(this).data('anchor');
-    const targetId = anchorMap[anchor]; // Lấy id thực sự cần cuộn tới
+        const anchor = $(this).data('anchor');
+        const targetId = anchorMap[anchor]; // Lấy id thực sự cần cuộn tới
 
-    if (targetId) {
-      const target = $('#' + targetId);
-      if (target.length) {
-        $('html, body').animate({
-          scrollTop: target.offset().top
-        }, 100); // Cuộn trong 600ms
-      }
-    }
-  });
-});
-</script>
+        if (targetId) {
+        const target = $('#' + targetId);
+        if (target.length) {
+            $('html, body').animate({
+            scrollTop: target.offset().top
+            }, 100); // Cuộn trong 600ms
+        }
+        }
+    });
+    });
+    </script>
+
+    <style>
+        input,
+        textarea {
+            --tw-ring-color: transparent !important;
+            outline: none !important;      /* Xóa luôn outline mặc định nếu cần */
+        }
+    </style>
 
     <!-- Legacy Polyfills -->
     <script nomodule="" src="https://static.parastorage.com/unpkg/core-js-bundle@3.2.1/minified.js"></script>
