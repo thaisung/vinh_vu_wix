@@ -315,15 +315,10 @@ Description=gunicorn socket
 
 [Socket]
 ListenStream=/run/gunicorn.sock
-# Our service won't need permissions for the socket, since it
-# inherits the file descriptor by socket activation
-# only the nginx daemon will need access to the socket
-SocketUser=www-data
-# Optionally restrict the socket permissions even more.
-# SocketMode=600
 
 [Install]
 WantedBy=sockets.target
+
 Lưu, đóng và tải tệp lên qua FTP khi bạn hoàn tất.
 
 Tiếp theo, tạo và mở tệp dịch vụ systemd cho Gunicorn với đặc quyền sudo. Tên tệp dịch vụ phải khớp với tên tệp ổ cắm ngoại trừ phần mở rộng:
@@ -338,15 +333,19 @@ After=network.target
 
 [Service]
 Type=notify
-# the specific user that our service will run as
-User=root
-# Group=someuser
-# another option for an even more restricted service is
-# DynamicUser=yes
-# see http://0pointer.net/blog/dynamic-users-with-systemd.html
+User=www-data
+Group=www-data
 RuntimeDirectory=gunicorn
 WorkingDirectory=/home/sleekproject/sleeksoft
-ExecStart=/home/sleekproject/sleekenv/bin/gunicorn sleeksoft.wsgi
+
+ExecStart=/home/sleekproject/sleekenv/bin/gunicorn \
+    --workers 3 \
+    --threads 2 \
+    --bind unix:/run/gunicorn.sock \
+    --access-logfile - \
+    --error-logfile - \
+    sleeksoft.wsgi:application
+
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
@@ -354,6 +353,7 @@ PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
+
 Lưu, đóng và tải tệp lên qua FTP khi bạn hoàn tất.
 
 Bây giờ, tệp dịch vụ systemd của chúng tôi đã hoàn tất. Bây giờ chúng ta có thể bắt đầu và kích hoạt ổ cắm Gunicorn. Điều này sẽ tạo tệp ổ cắm tại /run/gunicorn.sock ngay bây giờ và khi khởi động. Khi kết nối được thực hiện với ổ cắm đó, systemd sẽ tự động khởi động gunicorn.service để xử lý nó.

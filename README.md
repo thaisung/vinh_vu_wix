@@ -169,9 +169,10 @@ Tệp gunicorn.socket sẽ được tạo theo đường dẫn trên, tải xu�
 ```bash
 [Unit]
 Description=gunicorn socket
+
 [Socket]
 ListenStream=/run/gunicorn.sock
-SocketUser=www-data
+
 [Install]
 WantedBy=sockets.target
 ```
@@ -187,16 +188,27 @@ Tệp gunicorn.service sẽ được tạo theo đường dẫn trên, tải xu�
 Description=gunicorn daemon
 Requires=gunicorn.socket
 After=network.target
+
 [Service]
 Type=notify
-User=root
+User=www-data
+Group=www-data
 RuntimeDirectory=gunicorn
 WorkingDirectory=/home/sleekproject/sleeksoft
-ExecStart=/home/sleekproject/sleekenv/bin/gunicorn sleeksoft.wsgi
+
+ExecStart=/home/sleekproject/sleekenv/bin/gunicorn \
+    --workers 3 \
+    --threads 2 \
+    --bind unix:/run/gunicorn.sock \
+    --access-logfile - \
+    --error-logfile - \
+    sleeksoft.wsgi:application
+
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
 PrivateTmp=true
+
 [Install]
 WantedBy=multi-user.target
 ```
