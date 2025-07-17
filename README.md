@@ -1,6 +1,14 @@
-# Triển khai dụ án Website lên VPS(ubuntu)
+# Triển khai dụ án Website kunstnagelstudionail.online lên VPS (ubuntu)
 
-## Phần 1: Cài đặt các gói cần thiết
+## Phần chuẩn bị
+- Mua Vps hệ ubuntu bản thấp nhất 20.04 trở lên
+- Đăng ký 1 tên miền chính chủ kunstnagelstudionail.online từ các bên cho thuê.
+- Vào DNS tên miền đã thuê và trỏ ip VPS đã mua.
+
+## Phần kết nối VPS để tiến hành triển khai dự án
+- Có thể tải phần mềm Bitvise trên trình duyệt , sau đó tiến hành đăng nhập vào VPS
+
+## Phần 1: Cài đặt các gói cần thiết trên VPS đã mua
 Trước khi đi sâu vào cài đặt các gói cần thiết, chúng ta cần cập nhật và nâng cấp máy chủ cũng như các gói hiện có lên phiên bản mới nhất.
 ```bash
 sudo apt update -y
@@ -18,7 +26,7 @@ Tập tin phát triển Python
 PostgreSQL và Thư viện
 Máy chủ web Nginx
 
-## Phần 2: Tạo người dùng và cơ sở dữ liệu Postgres
+## Phần 2: Tạo người dùng và cơ sở dữ liệu Postgres trong VPS
 Chạy lệnh sau để vào môi trường Postgres. Theo mặc định khi Postgres được cài đặt, chúng tôi sẽ có một người dùng tên là 'postgres' có quyền quản trị trong PostgreSQL. Chúng tôi sử dụng người dùng này để tạo Cơ sở dữ liệu và tài khoản Người dùng trong postgres cho dự án của chúng tôi.
 ```bash
 sudo -u postgres psql
@@ -26,7 +34,7 @@ sudo -u postgres psql
 
 Tạo cơ sở dữ liệu cho dự án của chúng tôi
 ```bash
-CREATE DATABASE luxury_fashion;
+CREATE DATABASE kunstnagelstudionail;
 ```
 
 Lưu ý:  Mọi câu lệnh Postgres PHẢI kết thúc bằng dấu chấm phẩy
@@ -53,9 +61,9 @@ ALTER ROLE postgres SET default_transaction_isolation TO 'read committed';
 ALTER ROLE postgres SET timezone TO 'UTC';
 ```
 
-Bây giờ, hãy cung cấp cho người dùng cơ sở dữ liệu của chúng tôi 'postgres' để có tất cả các đặc quyền trong cơ sở dữ liệu 'luxury_fashion' .
+Bây giờ, hãy cung cấp cho người dùng cơ sở dữ liệu của chúng tôi 'postgres' để có tất cả các đặc quyền trong cơ sở dữ liệu 'kunstnagelstudionail' .
 ```bash
-GRANT ALL PRIVILEGES ON DATABASE luxury_fashion TO postgres;
+GRANT ALL PRIVILEGES ON DATABASE kunstnagelstudionail TO postgres;
 ```
 
 Bây giờ chúng tôi đã tạo thành công cơ sở dữ liệu và người dùng cơ sở dữ liệu có tất cả các đặc quyền đối với cơ sở dữ liệu mà chúng tôi đã tạo trong PostgreSQL. Thoát khỏi môi trường Postgres.
@@ -101,13 +109,13 @@ pip install django gunicorn psycopg2-binary pillow
 
 Bây giờ chúng tôi có tất cả phần mềm cần thiết để bắt đầu dự án Django.
 
-## Phần 4: Tạo và cấu hình dự án django
+## Phần 4: Tạo và cấu hình dự án Website
 Dấu nhắc đầu cuối:
 (sleekenv) root@host:/home/sleekproject#
 
 Clone dự án github về thư mục:
 ```bash
-git clone https://github.com/thaisung/Vinh_Vu_Luxury_Fashion_16_1_2025.git
+git clone https://github.com/thaisung/vinh_vu_wix.git
 ```
 
 Tiêp theo di chuyển vào thu mục sleeksoft:
@@ -299,7 +307,7 @@ Hướng dẫn Nginx về nơi tìm các tệp tĩnh mà chúng tôi đã thu th
 
 ```bash
 server {
-    server_name example.com;
+    server_name kunstnagelstudionail.online;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
