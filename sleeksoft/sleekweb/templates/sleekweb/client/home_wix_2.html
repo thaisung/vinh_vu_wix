@@ -107,6 +107,29 @@
         }
     </style>
 
+    <script>
+        // Chặn toàn bộ fetch
+        window.fetch = function () {
+        console.warn('fetch bị vô hiệu hóa');
+        return Promise.resolve({ json: () => Promise.resolve(null) });
+        };
+
+        // Chặn XMLHttpRequest
+        window.XMLHttpRequest = function () {
+        console.warn('XMLHttpRequest bị vô hiệu hóa');
+        return {
+            open: function () {},
+            send: function () {},
+            setRequestHeader: function () {},
+            readyState: 4,
+            status: 200,
+            responseText: '{}',
+            onreadystatechange: function () {}
+        };
+        };
+    </script>
+
+
     <!-- Legacy Polyfills -->
     <script nomodule="" src="https://static.parastorage.com/unpkg/core-js-bundle@3.2.1/minified.js"></script>
     <script nomodule=""
