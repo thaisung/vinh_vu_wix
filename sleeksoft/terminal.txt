@@ -1,5 +1,5 @@
-45.251.115.154
-3z8f2cTEUuA9
+103.179.173.226
+JzYb1kgYXed8PQYm
 
 ## backup dữ liệu
 mkdir -p /home/backup
@@ -167,13 +167,15 @@ sudo -u postgres psql|||
 
 Tạo cơ sở dữ liệu cho dự án của chúng tôi
 
-CREATE DATABASE Nguyen_Duc;|||
+CREATE DATABASE vinh_vu_wix;|||
 
 Lưu ý:  Mọi câu lệnh Postgres PHẢI kết thúc bằng dấu chấm phẩy
 
 Tạo người dùng cơ sở dữ liệu cho dự án của chúng tôi. Đảm bảo chọn mật khẩu an toàn.
 
 CREATE USER postgres WITH PASSWORD 'admin';|||
+ALTER USER postgres WITH PASSWORD 'admin';
+
 
 Lưu ý: Người dùng cơ sở dữ liệu ở đây là 'postgres' và mật khẩu là 'admin'
 
@@ -191,7 +193,7 @@ ALTER ROLE postgres SET timezone TO 'UTC';|||
 
 Bây giờ, hãy cung cấp cho người dùng cơ sở dữ liệu của chúng tôi 'postgres' để có tất cả các đặc quyền trong cơ sở dữ liệu 'sleeksoft' .
 
-GRANT ALL PRIVILEGES ON DATABASE Nguyen_Duc TO postgres;|||
+GRANT ALL PRIVILEGES ON DATABASE vinh_vu_wix TO postgres;|||
 
 Bây giờ chúng tôi đã tạo thành công cơ sở dữ liệu và người dùng cơ sở dữ liệu có tất cả các đặc quyền đối với cơ sở dữ liệu mà chúng tôi đã tạo trong PostgreSQL. Thoát khỏi môi trường Postgres.
 
@@ -227,6 +229,11 @@ Dấu nhắc đầu cuối sẽ thay đổi để cho biết rằng bạn hiện
 Khi môi trường ảo được kích hoạt, giờ đây chúng ta có thể cài đặt Django, Gunicorn và bộ điều hợp PostgreSQL (psycopg2) bằng pip. Trong môi trường ảo, chúng ta chỉ có thể sử dụng pip thay vì pip3 bất kể bạn có đang sử dụng Python phiên bản 3 hay không.
 
 pip install django gunicorn psycopg2-binary pillow|||
+pip install django-environ
+pip install django-tailwind
+pip install django-browser-reload
+pip install django-ckeditor
+pip install requests
 
 Bây giờ chúng tôi có tất cả phần mềm cần thiết để bắt đầu dự án Django.
 
