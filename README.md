@@ -1,4 +1,4 @@
-# Triển khai dụ án Website kunstnagelstudionail.online lên VPS (ubuntu)
+# Triển khai dự án Website kunstnagelstudionail.online lên VPS (ubuntu)
 
 ## Phần chuẩn bị
 - Mua Vps hệ ubuntu bản thấp nhất 20.04 trở lên
